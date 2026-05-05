@@ -27,6 +27,21 @@ fetch('dados.json')
     });
   });
 </script>
+map.on('click', function(e) {
+  const lat = e.latlng.lat;
+  const lng = e.latlng.lng;
 
+  const nome = prompt("Nome da equipe:");
+
+  if (!nome) return;
+
+  fetch('dados.json')
+    .then(r => r.json())
+    .then(dados => {
+      dados.push({ nome, lat, lng });
+
+      alert("Agora vá no dados.json e cole isso:\n\n" + JSON.stringify(dados, null, 2));
+    });
+});
 </body>
 </html>
