@@ -1,64 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8"/>
-  <title>Mapa de Equipes</title>
-
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-
-  <style>
-    body { margin: 0; }
-    #map { height: 100vh; }
-  </style>
-</head>
-
-<body>
-
-<div id="map"></div>
-
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
 <script>
-  // Criar mapa
-  const map = L.map('map').setView([-23.5, -46.6], 10);
+const map = L.map('map').setView([-23.5, -46.6], 10);
 
-  // Base do mapa
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
-    .addTo(map);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
+  .addTo(map);
 
-  // Carregar equipes do JSON
-  fetch('dados.json')
-    .then(r => r.json())
-    .then(dados => {
-      dados.forEach(e => {
-        L.marker([e.lat, e.lng])
-          .addTo(map)
-          .bindPopup("Equipe: " + e.nome);
-      });
-    });
-
-  // 👉 Clique no mapa para cadastrar equipe
-  map.on('click', function(e) {
-    const lat = e.latlng.lat;
-    const lng = e.latlng.lng;
-
-    const nome = prompt("Nome da equipe:");
-
-    if (!nome) return;
-
-    fetch('dados.json')
-      .then(r => r.json())
-      .then(dados => {
-        dados.push({ nome, lat, lng });
-
-        alert(
-          "Copie e cole no dados.json:\n\n" +
-          JSON.stringify(dados, null, 2)
-        );
-      });
-  });
-
+// TESTE DIRETO
+map.on('click', function(e) {
+  alert("CLIQUE FUNCIONOU");
+});
 </script>
-
-</body>
-</html>
